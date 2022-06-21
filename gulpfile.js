@@ -138,7 +138,9 @@ function watching() {
     },
   });
   watch(paths.html.dest).on('change', browsersync.reload);
-  watch(paths.html.src, html);
+  watch(paths.html.src, pug);
+  watch(paths.pug.dest).on('change', browsersync.reload);
+  watch(paths.pug.src, pug);
   watch(paths.styles.src, styles);
   watch(paths.scripts.src, scripts);
   watch(paths.images.src, images);
@@ -146,7 +148,7 @@ function watching() {
 
 const start = series(
   clear,
-  html,
+  parallel(html,pug),
   parallel(styles, scripts, images),
   srcSize,
   buildSize,
@@ -154,7 +156,7 @@ const start = series(
 );
 const build = series(
   clearFull,
-  html,
+  parallel(html,pug),
   parallel(styles, scripts, images),
   srcSize,
   buildSize,
