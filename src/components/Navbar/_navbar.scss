@@ -1,0 +1,21 @@
+nav {
+  background-color: rgba(0, 119, 134, 0.651);
+  overflow: hidden;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-block: 15px;
+}
+
+.logo {
+  a {
+    color: $white;
+  }
+}
+
+.menu {
+  display: flex;
+}

@@ -16,27 +16,27 @@ function html() {
     .pipe(htmlmin({
       collapseWhitespace: true
     }))
-    .pipe(dest('dist'))
+    .pipe(dest('build'))
 }
 
 function scss() {
-  return src('src/styles/**.scss')
+  return src('src/scss/**.scss')
       .pipe(sass())
       .pipe(autoprefixer({
         browsers: [ 'last 2 version' ]
       }))
       .pipe(csso())
       .pipe(concat('index.css'))
-      .pipe(dest('dist'))
+      .pipe(dest('build'))
 }
 
 function clear() {
-  return del('dist')
+  return del('build')
 }
 
 function serve() {
   sync.init({
-    server: './dist'
+    server: './build'
   })
   // @ts-ignore
   watch('src/**.html', series(html)).on('change', sync.reload)

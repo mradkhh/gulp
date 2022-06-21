@@ -1,0 +1,41 @@
+// Container
+.container {
+  max-width: ($containerWidth + $containerPadding) + px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: $containerSidePadding + px;
+
+
+  @media (max-widht: $breakpoint1450) {
+      max-width: 1200px;
+  }
+  @media (max-widht: $breakpoint992) {
+      max-width: 960px;
+  }
+  @media (max-widht: $breakpoint768) {
+      max-width: 740px;
+  }
+  @media (max-widht: $breakpoint480) {
+    max-width: none;
+  }
+}
+
+// Body Locked
+body {
+  font-family: $fontMain;
+
+  &.locked {
+    overflow: hidden;
+  }
+}
+
+// Animations
+// Fade
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
