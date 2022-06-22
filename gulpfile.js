@@ -8,7 +8,7 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
-var newer = require('gulp-newer');
+const newer = require('gulp-newer');
 const size = require('gulp-size');
 const browsersync = require('browser-sync').create();
 const gulppug = require('gulp-pug');
@@ -33,8 +33,8 @@ const paths = {
   },
   images: {
     src: 'src/images/**/*',
-    dest: 'build/media/',
-  },
+    dest: 'build/assets/images',
+  }
 };
 
 function pug() {
@@ -110,7 +110,7 @@ async function images() {
 }
 
 function clear() {
-  return del(['build/*', '!build/media']);
+  return del(['build/*', '!build/assets','build/assets/*', '!build/assets/fonts' ]);
 }
 function clearFull() {
   return del(['build']);
@@ -138,8 +138,7 @@ function watching() {
     },
   });
   watch(paths.html.dest).on('change', browsersync.reload);
-  watch(paths.html.src, pug);
-  watch(paths.pug.dest).on('change', browsersync.reload);
+  watch(paths.html.src, html);
   watch(paths.pug.src, pug);
   watch(paths.styles.src, styles);
   watch(paths.scripts.src, scripts);
@@ -163,12 +162,6 @@ const build = series(
 );
 
 // Gulp command line
-exports.pug = pug;
-exports.html = html;
-exports.styles = styles;
-exports.scripts = scripts;
-exports.images = images;
-exports.clear = clear;
 exports.clearfull = clearFull;
 exports.default = start;
 exports.build = build;
